@@ -27,34 +27,42 @@ int main()
 {
   setlocale(LC_ALL, "fr_be");
   int n,operation;
-  do {
-    cout << "Entrez un nombre entre 1 et " << nMax << ": ";
-    cin >> n;
-  } while (n < 1 || n > nMax);
-  do {
-    cout << "Quelle opération?" << endl
-      << "1: Somme de   " << n << " réels" << endl
-      << "2: Moyenne de " << n << " entiers" << endl
-      << "3: Maximum de " << n << " chaînes de texte" << endl
-      << "4: Recherche du minimum d'une matrice de caractères " << n << "x" << n << endl;
-    cin >> operation;
-  } while (operation < 1 || operation > 4);
-  switch (operation)
-  {
-  case 1:
-    sum(n);
-    break;
-  case 2:
-    avr(n);
-    break;
-  case 3:
-    max(n);
-    break;
-  case 4:
-    min(n);
-    break;
-  default:
-    break;
+  while (1) {
+    int attempts_left = 3;
+    do {
+      if (!attempts_left--) {
+        cout << "3 mauvaises valeurs, le programme s'arrête.";
+        return 10;
+      }
+      cout << "Entrez un nombre entre 1 et " << nMax << " (-1 pour quitter): ";
+      cin >> n;
+      if (n == -1) return 0;
+    } while (n < 1 || n > nMax);
+    do {
+      cout << "Quelle opération?" << endl
+        << "1: Somme de   " << n << " réels" << endl
+        << "2: Moyenne de " << n << " entiers" << endl
+        << "3: Maximum de " << n << " chaînes de texte" << endl
+        << "4: Recherche du minimum d'une matrice de caractères " << n << "x" << n << endl;
+      cin >> operation;
+    } while (operation < 1 || operation > 4);
+    switch (operation)
+    {
+    case 1:
+      sum(n);
+      break;
+    case 2:
+      avr(n);
+      break;
+    case 3:
+      max(n);
+      break;
+    case 4:
+      min(n);
+      break;
+    default:
+      break;
+    }
   }
   return 0;
 }
